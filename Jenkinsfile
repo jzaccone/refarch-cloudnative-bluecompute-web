@@ -9,7 +9,7 @@ podTemplate(label: 'mypod',
         containerTemplate(name: 'docker' , image: 'docker:17.06.1-ce', ttyEnabled: true, command: 'cat')
   ]) {
 
-    node('mypod') {
+    node() {
         checkout scm
         container('docker') {
             stage('Build Docker Image') {
