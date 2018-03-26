@@ -28,6 +28,7 @@ metadata:
     tier: frontend
     micro: web-bff
 spec:
+  type: NodePort
   ports:
   - protocol: TCP
     port: 80
