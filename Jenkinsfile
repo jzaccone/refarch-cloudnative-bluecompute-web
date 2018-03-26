@@ -9,7 +9,7 @@ podTemplate(label: 'mypod',
         containerTemplate(name: 'docker' , image: 'docker:17.06.1-ce', ttyEnabled: true, command: 'cat')
   ]) {
 
-    node() {
+    node('mypod') {
         checkout scm
         container('docker') {
             stage('Build Docker Image') {
@@ -55,7 +55,7 @@ podTemplate(label: 'mypod',
                 fi
 
                 # Update Deployment
-                kubectl set image deployment/\${DEPLOYMENT} web=\${REGISTRY}/\${NAMESPACE}/bluecompute-ce-web:${env.BUILD_NUMBER}
+                kubectl set image deployment/\${DEPLOYMENT} web=\${NAMESPACE}/bluecompute-ce-web:${env.BUILD_NUMBER}
                 kubectl rollout status deployment/\${DEPLOYMENT}
                 """
             }
